@@ -1,8 +1,35 @@
 import React, { Component} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
+
 import { gray } from '../utils/colors'
+import { fetchDeckResults, submitDeck, clearAll } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 class Decks extends Component {
+
+    componentDidMount (){
+        const { dispatch } = this.props
+
+        const key = 'MyDeck1'
+        //const name2 = 'MyDeck2'
+        const deck = {
+            title: key,
+            cards: []
+        }
+        /*const deck_2 = {
+            title: 'MyDeck2',
+            cards: []
+        }*/
+        clearAll()
+        
+        submitDeck({ key, deck })
+        //submitDeck({ name2, deck_2 })
+
+        fetchDeckResults()
+            .then((decks) => console.log(decks))
+    }
+
     decks = {
         1: {
             name: 'Deck 1',
@@ -58,5 +85,11 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Decks
+function mapStateToProps (decks){
+    return {
+        decks
+    }
+}
+
+export default connect(mapStateToProps)(Decks)
 

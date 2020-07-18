@@ -48,10 +48,12 @@ class Decks extends Component {
 
         const { deckName } = this.props.navigation.state.params
 
-        this.props.navigation.navigate(
+        /*this.props.navigation.navigate(
             'DeckView', 
             { deckName: deckName}
-        )
+        )*/
+        this.props.navigation.goBack(null)
+
     }
 
     render (){

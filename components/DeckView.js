@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import { gray, purple, white } from '../utils/colors'
+import { gray, purple, white, red } from '../utils/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { FontAwesome } from '@expo/vector-icons'
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -73,6 +72,24 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         },
+    },
+    deleteBtn: {
+        width: 200,
+        height: 40,
+        padding: 20,
+        marginTop: 17,
+        justifyContent: 'center',
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        }
+    },
+    delete: {
+        color: red,
+        alignSelf: 'center'
     },
     optionText: {
         alignSelf: 'center',

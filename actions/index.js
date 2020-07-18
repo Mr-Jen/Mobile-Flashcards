@@ -1,16 +1,24 @@
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
-export const ADD_ENTRY = 'ADD_ENTRY'
+export const ADD_CARD = 'ADD_CARD'
+export const ADD_DECK = 'ADD_ENTRY'
+export const DELETE_DECK = 'DELETE_DECK'
 
-export function receiveEntries (entries) {
+export function addDeck (name) {
   return {
-    type: RECEIVE_ENTRIES,
-    entries,
+    type: ADD_DECK,
+    name,
   }
 }
 
-export function addEntry (entry) {
+export function addCard (card) {
   return {
     type: ADD_ENTRY,
-    entry,
+    card,
+  }
+}
+
+export function deleteDeck (id){
+  return {
+    type: DELETE_DECK,
+    id
   }
 }

@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
 
+import middleware from './middleware';
 import reducer from './reducers'
 import { purple, white } from './utils/colors'
 import Decks from './components/Decks'
@@ -88,7 +89,7 @@ const Main = createAppContainer(Stack)
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <View style={{flex: 1}}>
           <FlashcardsStatusBar backgroundColor={purple} barStyle="light-content" />
           <Main/>

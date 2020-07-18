@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { NavigationActions } from 'react-navigation'
 
 import { white, purple } from '../utils/colors'
+import { submitDeck } from '../utils/api'
 
 function SubmitBtn ({ onPress, disabled }) {
     return (
@@ -18,20 +19,26 @@ function SubmitBtn ({ onPress, disabled }) {
 
 class Decks extends Component {
     state = {
-        name: ''
+        title: ''
     }
 
-    handleChangeName = (name) => {
+    handleChangeTitle = (title) => {
         this.setState(() => ({
-            name
+            title
         }))
     }
 
     handleOnAdd = () => {
-        alert(this.state.name)
-        // Dispatch new deck name
+        const title = this.state.title
+        // Dispatch new deck title
+        const deck = {
+            title: title,
+            cards: []
+        }
+        
+        submitDeck({ title, deck })
         this.setState(() => ({
-            name: ''
+            title: ''
         }))
         this.toHome()
     }
@@ -43,17 +50,17 @@ class Decks extends Component {
     }
 
     render (){
-        const { name } = this.state
+        const { title } = this.state
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Add New Deck Here</Text>
                 <TextInput
                     placeholder={`    Deck name`}
                     style={styles.input}
-                    value={name}
-                    onChange={(name) => this.handleChangeName(name.nativeEvent.text)}
+                    value={title}
+                    onChange={(title) => this.handleChangeTitle(title.nativeEvent.text)}
                 />
-                <SubmitBtn onPress={this.handleOnAdd} disabled={name === '' ? true : false}/>
+                <SubmitBtn onPress={this.handleOnAdd} disabled={title === '' ? true : false}/>
             </View>
         )
     }
