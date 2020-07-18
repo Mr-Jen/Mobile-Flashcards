@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import { connect } from 'react-redux'
 
 import { gray, purple } from '../utils/colors'
-import { fetchDeckResults, submitDeck, clearAll } from '../utils/api'
+import { fetchDeckResults, clearAll } from '../utils/api'
 import { receiveDecks } from '../actions'
 
 class Decks extends Component {
@@ -11,7 +11,7 @@ class Decks extends Component {
     componentDidMount (){
         const { dispatch } = this.props
 
-        clearAll()
+        //clearAll()
 
         fetchDeckResults()
             .then((decks) => dispatch(receiveDecks(decks)))
@@ -29,6 +29,7 @@ class Decks extends Component {
                     {
                         Object.keys(decks).map((title) => {
                             const deck = decks[title]
+                            const num = deck.cards.length
                             return (                            
                                 <View key={title}>
                                     <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
@@ -36,7 +37,7 @@ class Decks extends Component {
                                         { deckName: title}
                                     )}>
                                         <Text style={{fontSize: 20}}>{title}</Text>
-                                        <Text style={{fontSize: 16, color: gray}}>{deck.cards.length}</Text> 
+                                        <Text style={{fontSize: 16, color: gray}}>{`${num} ${num !== 1 ? 'cards' : 'card'}`}</Text> 
                                     </TouchableOpacity>
                                 </View>
                             )

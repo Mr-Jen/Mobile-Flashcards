@@ -1,7 +1,9 @@
 import React, { Component} from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
 
+import { submitCard } from '../utils/api'
+import { addCard } from '../actions/'
 import { white, purple } from '../utils/colors'
 
 function SubmitBtn ({ onPress, disabled }) {
@@ -16,7 +18,7 @@ function SubmitBtn ({ onPress, disabled }) {
     )
 }
 
-class Decks extends Component {
+class AddCard extends Component {
     static navigationOptions = () => {
 
         return {
@@ -41,12 +43,24 @@ class Decks extends Component {
     }
 
     handleSubmit = () => {
+        const title = this.props.navigation.state.params.deckName
+        const card = {
+            question: this.state.question,
+            answer: this.state.answer
+        }
+
+        this.props.dispatch(addCard({
+            title, card
+        }))
+
+        submitCard({ title, card})
+
         this.setState(() => ({
             question: '',
             answer: ''
         }))
 
-        const { deckName } = this.props.navigation.state.params
+        //const { deckName } = this.props.navigation.state.params
 
         /*this.props.navigation.navigate(
             'DeckView', 
@@ -131,5 +145,5 @@ const styles = StyleSheet.create({
     },
   })
 
-export default Decks
+export default connect()(AddCard)
 

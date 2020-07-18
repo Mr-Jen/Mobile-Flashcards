@@ -16,12 +16,13 @@ class DeckView extends Component {
     render (){
         const { deckName } = this.props.navigation.state.params
         const deck = this.props.decks[deckName]
+        const num = deck.cards.length
 
         return (
             <View>
                 <View style={styles.item}>
                     <Text style={{fontSize: 20}}>{deckName}</Text>
-                    <Text style={{fontSize: 16, color: gray}}>{`${deck.cards.length} cards`}</Text> 
+                    <Text style={{fontSize: 16, color: gray}}>{`${num} ${num !== 1 ? 'cards' : 'card'}`}</Text> 
                 </View>
                 <View style={styles.option}>                    
                     <TouchableOpacity style={styles.optionBtn} onPress={() => this.props.navigation.navigate(
@@ -30,7 +31,10 @@ class DeckView extends Component {
                     )}>
                         <Text style={styles.optionText}>Add Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.optionBtn}>
+                    <TouchableOpacity style={styles.optionBtn} onPress={() => this.props.navigation.navigate(
+                        'Quiz',
+                        { deckName: deckName}
+                    )}>
                         <Text style={styles.optionText}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
