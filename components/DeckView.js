@@ -23,7 +23,8 @@ class DeckView extends Component {
                 </View>
                 <View style={styles.option}>                    
                     <TouchableOpacity style={styles.optionBtn} onPress={() => this.props.navigation.navigate(
-                        'AddCard'
+                        'AddCard',
+                        { deckName: this.props.navigation.state.params.deckName}
                     )}>
                         <Text style={styles.optionText}>Add Card</Text>
                     </TouchableOpacity>

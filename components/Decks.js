@@ -3,16 +3,36 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { gray } from '../utils/colors'
 
 class Decks extends Component {
+    decks = {
+        1: {
+            name: 'Deck 1',
+            cards: 2
+        },
+        2: {
+            name: 'Deck 2',
+            cards: 5
+        }
+    }
     render (){
+        console.log(this.decks[1].name)
         return (
-            <View>
-                <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
-                    'DeckView', 
-                    { deckName: 'Deck 1'}
-                )}>
-                    <Text style={{fontSize: 20}}>Deck 1</Text>
-                    <Text style={{fontSize: 16, color: gray}}>2 Cards</Text> 
-                </TouchableOpacity>
+            <View>                
+                {
+                    Object.keys(this.decks).map((id) => {
+                        const deck = this.decks[id]
+                        return (                            
+                            <View key={id}>
+                                <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
+                                    'DeckView', 
+                                    { deckName: this.decks[id].name}
+                                )}>
+                                    <Text style={{fontSize: 20}}>{deck.name}</Text>
+                                    <Text style={{fontSize: 16, color: gray}}>{deck.name}</Text> 
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })
+                }
             </View>
             
         )

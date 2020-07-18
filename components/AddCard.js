@@ -45,17 +45,18 @@ class Decks extends Component {
             question: '',
             answer: ''
         }))
-        this.toHome()
-    }
 
-    toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddCard'
-        }))
+        const { deckName } = this.props.navigation.state.params
+
+        this.props.navigation.navigate(
+            'DeckView', 
+            { deckName: deckName}
+        )
     }
 
     render (){
         const { question, answer } = this.state
+        const validate = (question === '' || answer === '')
         return (
             <View style={styles.containers}>
                 <Text style={styles.title}>Add New Card Here</Text>
@@ -71,7 +72,7 @@ class Decks extends Component {
                     onChange={event => this.onChangeAnswer(event.nativeEvent.text)}
                     placeholder={`    Add Answer`}
                 />
-                <SubmitBtn onPress={this.handleSubmit} disabled={(question === '' && answer === '') ? true : false}/>
+                <SubmitBtn onPress={this.handleSubmit} disabled={validate ? true : false}/>
             </View>
         )
     }
