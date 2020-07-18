@@ -1,8 +1,8 @@
 import React, { Component} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
-import { gray } from '../utils/colors'
+import { gray, purple } from '../utils/colors'
 import { fetchDeckResults, submitDeck, clearAll } from '../utils/api'
 import { receiveDecks } from '../actions'
 
@@ -11,7 +11,7 @@ class Decks extends Component {
     componentDidMount (){
         const { dispatch } = this.props
 
-        //clearAll()
+        clearAll()
 
         fetchDeckResults()
             .then((decks) => dispatch(receiveDecks(decks)))
@@ -19,26 +19,32 @@ class Decks extends Component {
 
     render (){
         const { decks } = this.props
-        return (
-            <View>                
-                {
-                    Object.keys(decks).map((title) => {
-                        const deck = decks[title]
-                        return (                            
-                            <View key={title}>
-                                <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
-                                    'DeckView', 
-                                    { deckName: title}
-                                )}>
-                                    <Text style={{fontSize: 20}}>{title}</Text>
-                                    <Text style={{fontSize: 16, color: gray}}>{deck.cards.length}</Text> 
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    })
-                }
-            </View>
-        )
+
+        if(!Object.keys(decks).length){
+            return <View style={styles.noDeck}><Text style={styles.noDeckText}>No decks here so far</Text></View>
+        }
+        else {
+            return (
+                <ScrollView>                
+                    {
+                        Object.keys(decks).map((title) => {
+                            const deck = decks[title]
+                            return (                            
+                                <View key={title}>
+                                    <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
+                                        'DeckView', 
+                                        { deckName: title}
+                                    )}>
+                                        <Text style={{fontSize: 20}}>{title}</Text>
+                                        <Text style={{fontSize: 16, color: gray}}>{deck.cards.length}</Text> 
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        })
+                    }
+                </ScrollView>
+            )
+        }
     }
 }
 
@@ -59,6 +65,16 @@ const styles = StyleSheet.create({
             height: 3
         },
     },
+    noDeck: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    noDeckText: {
+        color: purple,
+        fontWeight: 'bold',
+        fontSize: 20
+    }
 })
 
 function mapStateToProps (decks){

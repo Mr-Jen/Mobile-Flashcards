@@ -18,8 +18,7 @@ class DeckView extends Component {
         const deck = this.props.decks[deckName]
 
         return (
-            <View> 
-                <Text>Deck Details - {deckName}</Text>
+            <View>
                 <View style={styles.item}>
                     <Text style={{fontSize: 20}}>{deckName}</Text>
                     <Text style={{fontSize: 16, color: gray}}>{`${deck.cards.length} cards`}</Text> 
