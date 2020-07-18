@@ -1,7 +1,29 @@
 import React, { Component} from 'react'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+
+import { white, purple } from '../utils/colors'
+
+function SubmitBtn ({ onPress, disabled }) {
+    return (
+        <TouchableOpacity
+            style={styles.submitBtn}
+            onPress={onPress}
+            disabled={disabled}
+        >
+            <Text style={styles.submitBtnText}>Add</Text>
+        </TouchableOpacity>
+    )
+}
 
 class Decks extends Component {
+    static navigationOptions = () => {
+
+        return {
+            title: 'Add New Card'
+        }
+    }
+
     state = {
         question : '',
         answer : ''
@@ -18,22 +40,92 @@ class Decks extends Component {
         }))
     }
 
+    handleSubmit = () => {
+        this.setState(() => ({
+            question: '',
+            answer: ''
+        }))
+        this.toHome()
+    }
+
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddCard'
+        }))
+    }
+
     render (){
+        const { question, answer } = this.state
         return (
-            <View>
-                <Text>Add New Deck Here</Text>
+            <View style={styles.containers}>
+                <Text style={styles.title}>Add New Card Here</Text>
                 <TextInput
+                    style={styles.input}
                     value={this.state.question}
-                    onChange={question => this.onChangeQuestion(question)}
+                    onChange={event => this.onChangeQuestion(event.nativeEvent.text)}
+                    placeholder={`    Add Question`}
                 />
                 <TextInput
+                    style={styles.input}
                     value={this.state.answer}
-                    onChange={answer => this.onChangeAnswer(answer)}
+                    onChange={event => this.onChangeAnswer(event.nativeEvent.text)}
+                    placeholder={`    Add Answer`}
                 />
+                <SubmitBtn onPress={this.handleSubmit} disabled={(question === '' && answer === '') ? true : false}/>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: white
+    },
+    title: {
+        alignSelf: 'center',
+        color: purple,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20
+    },
+    input: { 
+        height: 40, 
+        borderColor: 'gray', 
+        borderWidth: 1,
+        margin: 20
+    },
+    submitBtn: {
+        backgroundColor: purple,
+        width: 200,
+        height: 40,
+        borderRadius: 50,
+        padding: 20,
+        marginTop: 17,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
+    },
+    submitBtnText: {
+      color: white,
+      fontSize: 22,
+      textAlign: 'center',
+    },
+    center: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 30,
+      marginRight: 30,
+    },
+  })
 
 export default Decks
 

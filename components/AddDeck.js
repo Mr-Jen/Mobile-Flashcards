@@ -1,14 +1,15 @@
 import React, { Component} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 import { white, purple } from '../utils/colors'
 
-function SubmitBtn ({ onPress }) {
+function SubmitBtn ({ onPress, disabled }) {
     return (
         <TouchableOpacity
             style={styles.submitBtn}
             onPress={onPress}
-            enabled='false'
+            disabled={disabled}
         >
             <Text style={styles.submitBtnText}>Create</Text>
         </TouchableOpacity>
@@ -26,22 +27,33 @@ class Decks extends Component {
         }))
     }
 
-    handleOnPress = () => {
+    handleOnAdd = () => {
         alert(this.state.name)
         // Dispatch new deck name
+        this.setState(() => ({
+            name: ''
+        }))
+        this.toHome()
+    }
+
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddDeck'
+        }))
     }
 
     render (){
+        const { name } = this.state
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Add New Deck Here</Text>
                 <TextInput
-                    placeholder='Deck Name'
+                    placeholder={`    Deck name`}
                     style={styles.input}
-                    value={this.state.name}
+                    value={name}
                     onChange={(name) => this.handleChangeName(name.nativeEvent.text)}
                 />
-                <SubmitBtn onPress={this.handleOnPress}/>
+                <SubmitBtn onPress={this.handleOnAdd} disabled={name === '' ? true : false}/>
             </View>
         )
     }
