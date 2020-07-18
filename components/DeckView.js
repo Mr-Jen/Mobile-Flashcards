@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 
 import { gray, purple, white, red } from '../utils/colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -13,17 +14,20 @@ class DeckView extends Component {
         }
     }
     render (){
+        const { deckName } = this.props.navigation.state.params
+        const deck = this.props.decks[deckName]
+
         return (
             <View> 
-                <Text>Deck Details - {this.props.navigation.state.params.deckName}</Text>
+                <Text>Deck Details - {deckName}</Text>
                 <View style={styles.item}>
-                    <Text style={{fontSize: 20}}>Deck 1</Text>
-                    <Text style={{fontSize: 16, color: gray}}>2 Cards</Text> 
+                    <Text style={{fontSize: 20}}>{deckName}</Text>
+                    <Text style={{fontSize: 16, color: gray}}>{`${deck.cards.length} cards`}</Text> 
                 </View>
                 <View style={styles.option}>                    
                     <TouchableOpacity style={styles.optionBtn} onPress={() => this.props.navigation.navigate(
                         'AddCard',
-                        { deckName: this.props.navigation.state.params.deckName}
+                        { deckName: deckName}
                     )}>
                         <Text style={styles.optionText}>Add Card</Text>
                     </TouchableOpacity>
@@ -98,4 +102,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DeckView
+function mapStateToProps (decks){
+    return {
+        decks
+    }
+}
+
+export default connect(mapStateToProps)(DeckView)

@@ -5,14 +5,13 @@ const DECK_STORAGE_KEY = 'MobileFlashcards:decks'
 export function fetchDeckResults (){
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
         .then((decks) => {
-            return decks
+            return JSON.parse(decks)
         })
 }
 
-export function submitDeck ({key, deck}){
-    //console.log('KEY: ', key, 'DECK: ', deck)
+export function submitDeck ({title, deck}){
     return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-        [key] : deck
+        [title] : deck
     }))
 }
 

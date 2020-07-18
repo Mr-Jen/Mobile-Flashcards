@@ -11,57 +11,33 @@ class Decks extends Component {
     componentDidMount (){
         const { dispatch } = this.props
 
-        const key = 'MyDeck1'
-        //const name2 = 'MyDeck2'
-        const deck = {
-            title: key,
-            cards: []
-        }
-        /*const deck_2 = {
-            title: 'MyDeck2',
-            cards: []
-        }*/
-        clearAll()
-        
-        submitDeck({ key, deck })
-        //submitDeck({ name2, deck_2 })
+        //clearAll()
 
         fetchDeckResults()
-            .then((decks) => console.log(decks))
+            .then((decks) => dispatch(receiveDecks(decks)))
     }
 
-    decks = {
-        1: {
-            name: 'Deck 1',
-            cards: 2
-        },
-        2: {
-            name: 'Deck 2',
-            cards: 5
-        }
-    }
     render (){
-        console.log(this.decks[1].name)
+        const { decks } = this.props
         return (
             <View>                
                 {
-                    Object.keys(this.decks).map((id) => {
-                        const deck = this.decks[id]
+                    Object.keys(decks).map((title) => {
+                        const deck = decks[title]
                         return (                            
-                            <View key={id}>
+                            <View key={title}>
                                 <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
                                     'DeckView', 
-                                    { deckName: this.decks[id].name}
+                                    { deckName: title}
                                 )}>
-                                    <Text style={{fontSize: 20}}>{deck.name}</Text>
-                                    <Text style={{fontSize: 16, color: gray}}>{deck.name}</Text> 
+                                    <Text style={{fontSize: 20}}>{title}</Text>
+                                    <Text style={{fontSize: 16, color: gray}}>{deck.cards.length}</Text> 
                                 </TouchableOpacity>
                             </View>
                         )
                     })
                 }
             </View>
-            
         )
     }
 }

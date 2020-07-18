@@ -66,13 +66,13 @@ class Decks extends Component {
                     style={styles.input}
                     value={this.state.question}
                     onChange={event => this.onChangeQuestion(event.nativeEvent.text)}
-                    placeholder={`    Add Question`}
+                    placeholder={`Add Question`}
                 />
                 <TextInput
                     style={styles.input}
                     value={this.state.answer}
                     onChange={event => this.onChangeAnswer(event.nativeEvent.text)}
-                    placeholder={`    Add Answer`}
+                    placeholder={`Add Answer`}
                 />
                 <SubmitBtn onPress={this.handleSubmit} disabled={validate ? true : false}/>
             </View>
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         height: 40, 
         borderColor: 'gray', 
         borderWidth: 1,
-        margin: 20
+        margin: 20,
+        paddingLeft: 10
     },
     submitBtn: {
         backgroundColor: purple,

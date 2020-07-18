@@ -1,9 +1,11 @@
 import React, { Component} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
 
 import { white, purple } from '../utils/colors'
 import { submitDeck } from '../utils/api'
+import { addDeck } from '../actions'
 
 function SubmitBtn ({ onPress, disabled }) {
     return (
@@ -17,7 +19,7 @@ function SubmitBtn ({ onPress, disabled }) {
     )
   }
 
-class Decks extends Component {
+class AddDeck extends Component {
     state = {
         title: ''
     }
@@ -35,6 +37,10 @@ class Decks extends Component {
             title: title,
             cards: []
         }
+
+        this.props.dispatch(addDeck({
+            [title]: deck
+        }))
         
         submitDeck({ title, deck })
         this.setState(() => ({
@@ -55,7 +61,7 @@ class Decks extends Component {
             <View style={styles.container}>
                 <Text style={styles.title}>Add New Deck Here</Text>
                 <TextInput
-                    placeholder={`    Deck name`}
+                    placeholder={`Deck name`}
                     style={styles.input}
                     value={title}
                     onChange={(title) => this.handleChangeTitle(title.nativeEvent.text)}
@@ -82,7 +88,8 @@ const styles = StyleSheet.create({
         height: 40, 
         borderColor: 'gray', 
         borderWidth: 1,
-        margin: 20
+        margin: 20,
+        padding: 10
     },
     submitBtn: {
       backgroundColor: purple,
@@ -109,5 +116,5 @@ const styles = StyleSheet.create({
     },
   })
 
-export default Decks
+export default connect()(AddDeck)
 
