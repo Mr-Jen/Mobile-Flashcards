@@ -1,4 +1,6 @@
 import 'react-native-gesture-handler';
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Remote debugger']);
 import React from 'react'
 import { View, StatusBar, Text } from 'react-native'
 import { createStore } from 'redux'
@@ -8,6 +10,7 @@ import  Constants  from 'expo-constants'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
+import { setLocalNotification } from './utils/helpers'
 
 import middleware from './middleware';
 import reducer from './reducers'
@@ -97,6 +100,9 @@ const Stack = createStackNavigator({
 const Main = createAppContainer(Stack)
 
 export default class App extends React.Component {
+  componentDidMount (){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>

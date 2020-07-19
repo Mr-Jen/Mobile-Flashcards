@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-import { purple, white, blue, red } from '../utils/colors'
+import { purple, white, blue } from '../utils/colors'
 
 class Quiz extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { deckName } = navigation.state.params
+
+        return {
+            title: `${deckName} Quiz`
+        }
+    }
     state = {
         correct: 0,
         option: null,
@@ -32,6 +39,13 @@ class Quiz extends Component {
         }))
     }
 
+    handleRestart = () => {
+        this.setState(() => ({
+            position: 0,
+            correct: 0
+        }))
+    }
+
     render (){
         const { deckName } = this.props.navigation.state.params
         const deck = this.props.decks[deckName]
@@ -47,20 +61,17 @@ class Quiz extends Component {
                     <View styles={{flex:1}}>
                         <View style={styles.result}>
                             <Text style={styles.resultTitle}>Your Result:</Text>
-                            <Text style={styles.resultScore}>You scored {correct} / {length}</Text>
+                            <Text style={styles.resultScore}>You scored   {correct} / {length}</Text>
                         </View>
-                        <View style={styles.choice}>                    
+                        <View style={styles.choice}> 
+                            <TouchableOpacity style={styles.choiceBtn} onPress={this.handleRestart}>
+                                <Text style={styles.choiceText}>Try again</Text>
+                            </TouchableOpacity>                   
                             <TouchableOpacity style={styles.choiceBtn} onPress={() => this.props.navigation.navigate(
-                                'AddCard',
+                                'DeckView',
                                 { deckName: deckName}
                             )}>
-                                <Text style={styles.choiceText}>Add Card</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.choiceBtn} onPress={() => this.props.navigation.navigate(
-                                'Quiz',
-                                { deckName: deckName}
-                            )}>
-                                <Text style={styles.choiceText}>Start Quiz</Text>
+                                <Text style={styles.choiceText}>Back To Deck</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -69,7 +80,7 @@ class Quiz extends Component {
             else {
                 return (
                     <View style={styles.container}>
-                        <Text style={styles.remain}>{length - position} questions remain</Text>
+                        <Text style={styles.remain}>{length - position} {length-position !== 1 ? 'questions remain' : 'question remains'}</Text>
                         <View style={styles.item}>
                             <Text style={styles.title}>Question {position+1}:</Text>
                             <Text style={{fontSize: 20}}>{deck.cards[position].question} ?</Text>
@@ -87,12 +98,12 @@ class Quiz extends Component {
                                 </View>
                                 
                                 <View style={styles.optionContainer}>
-                                    <Text style={styles.optionTitle}>Did you get it right?</Text>
+                                    <Text style={styles.optionTitle}>Was your answer correct?</Text>
                                     <View style={styles.options}>
-                                        <TouchableOpacity style={styles.option} onPress={() => this.handleOption(true)}>
+                                        <TouchableOpacity style={[styles.option, {borderTopRightRadius: 0, borderBottomRightRadius: 0}]} onPress={() => this.handleOption(true)}>
                                             <Text style={styles.nextText}>{option === true ? '>  Yes  <' : 'Yes'}</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.handleOption(false)} style={[styles.option, {backgroundColor: 'rgb(138, 15, 15)'}]}>
+                                        <TouchableOpacity onPress={() => this.handleOption(false)} style={[styles.option, {borderTopLeftRadius: 0, borderBottomLeftRadius: 0, backgroundColor: 'rgb(138, 15, 15)'}]}>
                                             <Text style={styles.nextText}>{option === false ? '>  No  <' : 'No'}</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -160,7 +171,7 @@ const styles = StyleSheet.create({
     },
     choice: {
         alignSelf: 'center',
-        marginTop: 300
+        marginTop: 250
     },
     choiceBtn: {
         backgroundColor: purple,
@@ -189,7 +200,8 @@ const styles = StyleSheet.create({
     },
     options: {
         flex: 1,
-        marginTop: 20,
+        flexDirection: 'row',
+        marginTop: 30,
     },
     option: {
         backgroundColor: 'rgb(31, 95, 22)',
@@ -197,7 +209,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 10,
         padding: 20,
-        marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
