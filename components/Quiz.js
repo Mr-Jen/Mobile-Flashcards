@@ -61,6 +61,9 @@ class Quiz extends Component {
             if(position === length){
                 clearLocalNotification()
                     .then(setLocalNotification)
+                if (correct/length >= 0.8){
+                    alert('🎉 Great work! 🎉')
+                } 
                 return (
                     <Result 
                         correct={correct} 
