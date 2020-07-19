@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { purple, white, blue } from '../utils/colors'
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
-import Result from './Result'
+import { Result } from './Result'
 
 class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -62,13 +62,7 @@ class Quiz extends Component {
                 clearLocalNotification()
                     .then(setLocalNotification)
                 return (
-                    <Result 
-                        correct={correct} 
-                        length={length} 
-                        deckName={deckName} 
-                        handleRestart={this.handleRestart}
-                        navigation={this.props.navigation}
-                    />
+                    <Result correct={correct} length={length} deckName={deckName} hanldeRestart={this.handleRestart}/>
                 )
             }
             else {
