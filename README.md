@@ -2,6 +2,8 @@ This project is my submission for the React Native 'Mobile Flashcards' exericise
 
 The app allows you to create your own decks to which you can add your own flashcards.
 You can take quizzes on any deck you created to test your knowledge.
+When you perform very good (at least 80% correct), you will receive a toast on your good work.
+
 By default, when you open the app, a notification is prepared for you to remind you to practice.
 Whenever you finish a quiz, said notification gets deleted and will be set up for the same time 
 the next day.
