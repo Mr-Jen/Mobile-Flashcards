@@ -62,6 +62,7 @@ class Quiz extends Component {
                         <View style={styles.result}>
                             <Text style={styles.resultTitle}>Your Result:</Text>
                             <Text style={styles.resultScore}>You scored   {correct} / {length}</Text>
+                            <Text style={styles.resultScore}>{Math.round(((correct/length)*100) * 100) / 100}% correct</Text>
                         </View>
                         <View style={styles.choice}> 
                             <TouchableOpacity style={styles.choiceBtn} onPress={this.handleRestart}>
