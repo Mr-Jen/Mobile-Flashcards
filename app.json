@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mobile-flashcards",
+    "name": "Moible-Flashcards",
     "slug": "mobile-flashcards",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,6 +18,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "org.mobile_flashcards.exp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
