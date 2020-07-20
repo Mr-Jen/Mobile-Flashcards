@@ -2,10 +2,10 @@ import 'react-native-gesture-handler';
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Remote debugger']);
 import React from 'react'
-import { View, StatusBar, Text } from 'react-native'
+import { View, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { FontAwesome, Feather } from '@expo/vector-icons'
 import  Constants  from 'expo-constants'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
@@ -34,7 +34,7 @@ const Tabs = createBottomTabNavigator({
     screen: Decks,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <Feather name='book-open' size={30} color={tintColor} />
     }
   },
   AddDeck: {

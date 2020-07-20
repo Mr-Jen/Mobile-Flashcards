@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { ConfirmDialog } from 'react-native-simple-dialogs'
 
 import { gray, purple, white, red } from '../utils/colors'
 import { removeDeckFromStorage } from '../utils/api'
 import { removeDeck } from '../actions'
 
 class DeckView extends Component {
+    state = {
+        dialogVisible: false
+    }
+
     static navigationOptions = ({ navigation }) => {
         const { deckName } = navigation.state.params
 
@@ -15,13 +20,24 @@ class DeckView extends Component {
         }
     }
 
-    handleDelete = () => {
+    delete = () => {
         const { deckName } = this.props.navigation.state.params
+
+        this.setState({
+            dialogVisible: false
+        })
 
         this.props.navigation.navigate('Decks')
         removeDeckFromStorage(deckName)
         this.props.dispatch(removeDeck(deckName))
     }
+
+    noDelete = () => {
+        this.setState({
+            dialogVisible: false
+        })
+    }
+
 
     render (){
         const { deckName } = this.props.navigation.state.params
@@ -47,9 +63,23 @@ class DeckView extends Component {
                     )}>
                         <Text style={styles.optionText}>Start Quiz</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.deleteBtn} onPress={this.handleDelete}>
+                    <TouchableOpacity style={styles.deleteBtn} onPress={() => this.setState({dialogVisible: true})}>
                         <Text style={styles.delete}>Delete Deck</Text>
                     </TouchableOpacity>
+                    <ConfirmDialog
+                        title="Confirm Delete"
+                        message="Are you sure you want to delete this deck?"
+                        visible={this.state.dialogVisible}
+                        onTouchOutside={() => this.setState({dialogVisible: false})}
+                        positiveButton={{
+                            title: "YES",
+                            onPress: () => this.delete()
+                        }}
+                        negativeButton={{
+                            title: "NO",
+                            onPress: () => this.noDelete()
+                        }}
+                    />
                 </View>
             </View>
         )
