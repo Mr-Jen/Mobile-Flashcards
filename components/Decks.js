@@ -26,7 +26,7 @@ class Decks extends Component {
         }
         else {
             return (
-                <ScrollView>          
+                <ScrollView horizontal={true}>                
                     {
                         Object.keys(decks).map((title) => {
                             const deck = decks[title]

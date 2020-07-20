@@ -21,7 +21,17 @@ const Deck = (props) => {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white'
+    },
+    fixedRatio: {
+        flex: 1,
+        aspectRatio: 1,
+     },
     item: {
         backgroundColor: 'rgb(238, 232, 225)',
         borderRadius: 2,

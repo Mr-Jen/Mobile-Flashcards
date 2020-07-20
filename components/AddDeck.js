@@ -73,23 +73,26 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 20,
-      backgroundColor: white
+      backgroundColor: white,
+      paddingTop: 60
     },
     title: {
         alignSelf: 'center',
         color: purple,
-        fontSize: 25,
-        fontWeight: 'bold'
+        fontSize: 30,
+        fontWeight: 'bold',
+        paddingBottom: 30
     },
     input: { 
         height: 40, 
         borderColor: 'gray', 
         borderWidth: 1,
         margin: 20,
-        padding: 10
+        padding: 10,
+        borderRadius: 10
     },
     submitBtn: {
-      backgroundColor: purple,
+      backgroundColor: "rgb(228, 122, 35)",
       padding: 10,
       paddingLeft: 30,
       paddingRight: 30,
@@ -98,6 +101,8 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       justifyContent: 'center',
       alignItems: 'center',
+      borderRadius: 8,
+      marginTop: 20
     },
     submitBtnText: {
       color: white,

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'; 
 
 import { purple, white, blue } from '../utils/colors'
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 import Result from './Result'
+import FlipCard from './FlipCard'
 
 class Quiz extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -77,7 +79,7 @@ class Quiz extends Component {
             else {
                 return (
                     <View style={styles.container}>
-                        <Text style={styles.remain}>{length - position} {length-position !== 1 ? 'questions remain' : 'question remains'}</Text>
+                        {/*<Text style={styles.remain}>{length - position} {length-position !== 1 ? 'questions remain' : 'question remains'}</Text>
                         <View style={styles.item}>
                             <Text style={styles.title}>Question {position+1}:</Text>
                             <Text style={{fontSize: 20}}>{deck.cards[position].question} ?</Text>
@@ -87,6 +89,8 @@ class Quiz extends Component {
                             }>
                                 <Text style={styles.nextText}>Show Answer</Text>
                         </TouchableOpacity>
+                        */}
+                            <FlipCard/>
                         {showAnswer 
                         ?   <View>
                                 <View style={styles.item}>
@@ -110,7 +114,8 @@ class Quiz extends Component {
                         }
                         <View style={styles.nexBtnContainer}>
                             <TouchableOpacity style={styles.nextBtn} onPress={this.handleNext}>
-                                    <Text style={styles.nextText}>Next Question  ---></Text>
+                                    <Text style={styles.nextText}>Next Question</Text>
+                                    <AntDesign name="arrowright" size={24} color={white} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -258,13 +263,15 @@ const styles = StyleSheet.create({
 
     },
     nextBtn: {
+        flex: 1,
+        flexDirection: 'row',
         backgroundColor: purple,
         width: 200,
         height: 40,
         borderRadius: 10,
         padding: 20,
         marginBottom: 30,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         alignSelf: 'center',
         shadowRadius: 3,
@@ -276,7 +283,10 @@ const styles = StyleSheet.create({
         },
     },
     nextText: {
-        color: white
+        color: white,
+        fontSize: 18,
+        alignSelf: 'center',
+        paddingRight: 7
     },
     showAnswer: {
         backgroundColor: blue,
