@@ -1,6 +1,5 @@
 import React, { Component} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 
 import { white, purple } from '../utils/colors'

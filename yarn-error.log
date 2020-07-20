@@ -1,5 +1,5 @@
 Arguments: 
-  E:\Program Files\nodejs\node.exe C:\Users\Jan Ernst\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add expo-permissions@~9.0.1
+  E:\Program Files\nodejs\node.exe C:\Users\Jan Ernst\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @react-native-community/async-storage
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Jan Ernst\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;E:\Program Files (x86)\Java 8\bin;C:\MongoDB\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft VS Code\bin;E:\Program Files\python;E:\Program Files\python\Scripts;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;E:\Program Files\nodejs;E:\Program Files\Android\Android\Sdk\platform-tools;C:\Windows\System32;E:\Scripts;C:\Users\Jan Ernst\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;E:\Programme\python;E:\Programme\python\Scripts;C:\Users\Jan Ernst;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Users\Jan Ernst\AppData\Local\Microsoft\WindowsApps;E:\Program Files\heroku\bin;C:\Users\Jan Ernst\AppData\Roaming\npm;E:\Program Files\Android\Android\Sdk\platform-tools
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'E:\Jan Ernst\Dokumente\Informatik Privat\React\Udacity React Course\Lesson 4 - React Native\mobile-flashcards\node_modules\@babel\generator\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'E:\Jan Ernst\Dokumente\Informatik Privat\React\Udacity React Course\Lesson 4 - React Native\mobile-flashcards\node_modules\es6-template\node_modules\.bin'
 
 npm manifest: 
   {
@@ -52,8 +52,6 @@ npm manifest:
       "babel-preset-expo": "~8.1.0",
       "i": "^0.3.6",
       "npm": "^6.14.6",
-      "react-native-debugger-open": "^0.3.25",
-      "redux-devtools-extension": "^2.13.8",
       "und": "^2.7.0"
     },
     "private": true

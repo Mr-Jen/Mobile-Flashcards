@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const DECK_STORAGE_KEY = 'MobileFlashcards:decks'
 
@@ -14,6 +14,16 @@ export function submitDeck ({title, deck}){
         [title] : deck
     }))
 }
+
+export function removeDeckFromStorage (key) {
+    return AsyncStorage.getItem(DECK_STORAGE_KEY)
+      .then((results) => {
+        const data = JSON.parse(results)
+        data[key] = undefined
+        delete data[key]
+        AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
+      })
+  }
 
 export function submitCard ({ title, card }){
     fetchDeck(title).then((deck) => {

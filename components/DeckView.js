@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import { gray, purple, white, red } from '../utils/colors'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { removeDeckFromStorage } from '../utils/api'
+import { removeDeck } from '../actions'
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -13,10 +14,19 @@ class DeckView extends Component {
             title: deckName
         }
     }
+
+    handleDelete = () => {
+        const { deckName } = this.props.navigation.state.params
+
+        this.props.navigation.navigate('Decks')
+        removeDeckFromStorage(deckName)
+        this.props.dispatch(removeDeck(deckName))
+    }
+
     render (){
         const { deckName } = this.props.navigation.state.params
         const deck = this.props.decks[deckName]
-        const num = deck.cards.length
+        const num = deck && deck.cards.length
 
         return (
             <View>
@@ -36,6 +46,9 @@ class DeckView extends Component {
                         { deckName: deckName}
                     )}>
                         <Text style={styles.optionText}>Start Quiz</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.deleteBtn} onPress={this.handleDelete}>
+                        <Text style={styles.delete}>Delete Deck</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -84,7 +97,7 @@ const styles = StyleSheet.create({
         width: 200,
         height: 40,
         padding: 20,
-        marginTop: 17,
+        marginTop: 10,
         justifyContent: 'center',
         shadowRadius: 3,
         shadowOpacity: 0.8,
@@ -110,5 +123,6 @@ function mapStateToProps (decks){
         decks
     }
 }
+
 
 export default connect(mapStateToProps)(DeckView)
