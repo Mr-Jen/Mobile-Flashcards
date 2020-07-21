@@ -7,7 +7,7 @@ import {
   Animated
 } from 'react-native';
 
-import { black, purple, white, gray } from '../utils/colors'
+import { black, purple, white} from '../utils/colors'
 
 class FlipCard extends Component {
     
@@ -42,8 +42,12 @@ class FlipCard extends Component {
         useNativeDriver: true
       }).start();
     }
-
   }
+
+    onPressCard = () => {
+        this.flipCard()
+        this.props.onPress()
+    }
   
   render() {
     const frontAnimatedStyle = {
@@ -56,23 +60,37 @@ class FlipCard extends Component {
         { rotateY: this.backInterpolate }
       ]
     }
+
+    const { length, position, deck } = this.props
+
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.flipCard()}>
+        <TouchableOpacity onPress={() => this.onPressCard()}>
             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Question 1:</Text>
+                    <Text style={styles.headerText}>Question {position+1}:</Text>
+                    <View style={{justifyContent: 'center', marginLeft: '50%'}}>
+                        <Text style={{fontWeight: 'bold'}}>{position+1}/{length}</Text>
+                    </View>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.flipText}>
-                        How tall are the pyramids in Egypt?ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                        {deck.cards[position].question} ?
                     </Text>
                 </View>
             </Animated.View>
             <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-                <Text style={styles.flipText}>
-                    This text is flipping on the back.
-                </Text>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>Answer:</Text>
+                    <View style={{justifyContent: 'center', marginLeft: '50%'}}>
+                        <Text style={{fontWeight: 'bold', marginLeft: '30%'}}>{position+1}/{length}</Text>
+                    </View>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.flipText}>
+                        {deck.cards[position].answer}
+                    </Text>
+                </View>
             </Animated.View>
         </TouchableOpacity>
       </View>
@@ -85,8 +103,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    flex: 1,
+    flexDirection: 'row',
     alignSelf: 'flex-start',
-    paddingLeft: '15%',
+    paddingLeft: '9%',
     position: 'absolute',
     top: 15,
   },

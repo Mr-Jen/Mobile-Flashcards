@@ -79,25 +79,14 @@ class Quiz extends Component {
             else {
                 return (
                     <View style={styles.container}>
-                        {/*<Text style={styles.remain}>{length - position} {length-position !== 1 ? 'questions remain' : 'question remains'}</Text>
-                        <View style={styles.item}>
-                            <Text style={styles.title}>Question {position+1}:</Text>
-                            <Text style={{fontSize: 20}}>{deck.cards[position].question} ?</Text>
-                        </View>
-                        <TouchableOpacity style={styles.showAnswer} onPress={
-                                () => this.setState(() => ({showAnswer: true}))
-                            }>
-                                <Text style={styles.nextText}>Show Answer</Text>
-                        </TouchableOpacity>
-                        */}
-                            <FlipCard/>
+                            <FlipCard 
+                                length={length} 
+                                position={position} 
+                                deck={deck} 
+                                onPress={() => this.setState(() => ({showAnswer: true}))}
+                            />
                         {showAnswer 
-                        ?   <View>
-                                <View style={styles.item}>
-                                    <Text style={styles.title}>Answer:</Text>
-                                    <Text style={{fontSize: 20}}>{deck.cards[position].answer}</Text>
-                                </View>
-                                
+                        ?   <View>                                
                                 <View style={styles.optionContainer}>
                                     <Text style={styles.optionTitle}>Was your answer correct?</Text>
                                     <View style={styles.options}>
@@ -159,21 +148,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: purple
     },
-    remain: {
-        alignSelf: 'flex-end', 
-        paddingRight: 20, 
-        paddingTop: 20, 
-        marginBottom: -15,
-        fontWeight: 'bold'
-    },
     optionContainer: {
         flex: 1,
-        marginTop: 30,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: -200
     },
     choice: {
         alignSelf: 'center',
-        marginTop: 250
     },
     choiceBtn: {
         backgroundColor: purple,
@@ -181,7 +163,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 50,
         padding: 20,
-        marginTop: 17,
         justifyContent: 'center',
         shadowRadius: 3,
         shadowOpacity: 0.8,
@@ -198,16 +179,16 @@ const styles = StyleSheet.create({
     },
     optionTitle: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: '-25%'
     },
     options: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 30,
     },
     option: {
         backgroundColor: 'rgb(31, 95, 22)',
-        width: 100,
+        width: 130,
         height: 40,
         borderRadius: 10,
         padding: 20,
@@ -221,30 +202,6 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         },
-    },
-    title: {
-        marginTop: -10,
-        marginBottom: 10,
-        fontStyle: 'italic',
-        textDecorationLine: 'underline',
-        color: purple,
-        fontWeight: 'bold'
-    },
-    item: {
-        backgroundColor: 'rgb(238, 232, 225)',
-        borderRadius: 2,
-        padding: 20,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 17,
-        justifyContent: 'center',
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        }
     },
     noDeck: {
         flex: 1,
@@ -287,24 +244,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
         paddingRight: 7
-    },
-    showAnswer: {
-        backgroundColor: blue,
-        width: 150,
-        height: 20,
-        borderRadius: 10,
-        padding: 20,
-        marginTop: 17,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center',
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
     },
 })
 

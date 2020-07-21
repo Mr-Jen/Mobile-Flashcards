@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import { white, purple } from '../utils/colors'
+import { white, purple, lightPurp } from '../utils/colors'
 import { submitDeck } from '../utils/api'
 import { addDeck } from '../actions'
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     submitBtn: {
-      backgroundColor: "rgb(228, 122, 35)",
+      backgroundColor: lightPurp,
       padding: 10,
       paddingLeft: 30,
       paddingRight: 30,
