@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-import { gray } from '../utils/colors'
+import { gray, purple, white } from '../utils/colors'
 
 const Deck = (props) => {
-    const { title, num } = props
+    const { title, num, color } = props
     return (
         <View style={styles.container}>
             <View style={styles.fixedRatio}>
-                <TouchableOpacity style={styles.item} onPress={() => props.navigation.navigate(
+                <TouchableOpacity style={[styles.item, {backgroundColor: color === null ? purple : color}]} onPress={() => props.navigation.navigate(
                     'DeckView', 
                     { deckName: title}
                 )}>
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
      },
     item: {
         flex: 1,
-        backgroundColor: 'rgb(238, 232, 225)',
         borderRadius: 2,
         padding: 20,
         height: 150,
@@ -57,10 +56,11 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
+        color: white
     },
     cardNumber: {
         fontSize: 16, 
-        color: gray,
+        color: white,
     }
 })
 

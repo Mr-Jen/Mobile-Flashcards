@@ -30,10 +30,11 @@ class Decks extends Component {
                     {
                         Object.keys(decks).map((title) => {
                             const deck = decks[title]
+                            const color = deck.color
                             const num = deck.cards.length
                             return (                            
                                 <View key={title} style={{flex: 1}}>
-                                    <Deck title={title} num={num} navigation={this.props.navigation}/>
+                                    <Deck title={title} num={num} color={color} navigation={this.props.navigation}/>
                                 </View>
                             )
                         })

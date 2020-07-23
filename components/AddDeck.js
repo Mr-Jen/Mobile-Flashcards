@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import { white, purple, lightPurp } from '../utils/colors'
+import { white, purple, orange, red, green, brown, yellow, blue } from '../utils/colors'
 import { submitDeck } from '../utils/api'
 import { addDeck } from '../actions'
 
@@ -20,7 +20,8 @@ function SubmitBtn ({ onPress, disabled }) {
 
 class AddDeck extends Component {
     state = {
-        title: ''
+        title: '',
+        color: null
     }
 
     handleChangeTitle = (title) => {
@@ -30,10 +31,12 @@ class AddDeck extends Component {
     }
 
     handleOnAdd = () => {
-        const title = this.state.title
+        const {title, color } = this.state
+
         // Dispatch new deck title
         const deck = {
             title: title,
+            color: color,
             cards: []
         }
 
@@ -52,8 +55,17 @@ class AddDeck extends Component {
         )
     }
 
+    onChangeColor = (color) => {
+        this.setState({
+            color
+        })
+    }
+
     render (){
         const { title } = this.state
+
+        console.log(this.state.color)
+
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Add New Deck Here</Text>
@@ -63,6 +75,17 @@ class AddDeck extends Component {
                     value={title}
                     onChange={(title) => this.handleChangeTitle(title.nativeEvent.text)}
                 />
+                <View styles={styles.colorPicker}>
+                    <Text>Pick a color for your deck:</Text>
+                    <View style={styles.colors}>
+                        <TouchableOpacity onPress={() => this.onChangeColor('yellow')} style={[styles.color, {backgroundColor: yellow}]}></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onChangeColor('orange')} style={[styles.color, {backgroundColor: orange}]}></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onChangeColor('red')} style={[styles.color, {backgroundColor: red}]}></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onChangeColor('brown')} style={[styles.color, {backgroundColor: brown}]}></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onChangeColor('green')} style={[styles.color, {backgroundColor: green}]}></TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.onChangeColor('blue')} style={[styles.color, {backgroundColor: blue}]}></TouchableOpacity>
+                    </View>
+                </View>
                 <SubmitBtn onPress={this.handleOnAdd} disabled={title === '' ? true : false}/>
             </View>
         )
@@ -75,6 +98,24 @@ const styles = StyleSheet.create({
       padding: 20,
       backgroundColor: white,
       paddingTop: 60
+    },
+    colors: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        height: 50,
+        width: 350,
+        margin: 20,
+        borderColor: purple,
+        alignSelf: 'center',
+    },
+    color: {
+        margin: 13,
+        backgroundColor: purple,
+        borderRadius: 50,
+        width: 30,
+        height: 30,
     },
     title: {
         alignSelf: 'center',
