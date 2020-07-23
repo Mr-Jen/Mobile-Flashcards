@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         backgroundColor: purple,
         width: 200,
         height: 40,
-        borderRadius: 50,
+        borderRadius: 10,
         padding: 20,
         marginTop: 17,
         justifyContent: 'center',

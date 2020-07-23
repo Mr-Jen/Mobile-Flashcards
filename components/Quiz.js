@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-import { purple, white, blue } from '../utils/colors'
+import { purple, white } from '../utils/colors'
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 import Result from './Result'
 import FlipCard from './FlipCard'
@@ -20,16 +20,19 @@ class Quiz extends Component {
         correct: 0,
         option: null,
         position: 0,
-        showAnswer: false
+        showAnswer: false,
+        flipped: false
     }
 
     handleNext = () => {
         if (this.state.option !== null){
+            this.state.flipped && this.child.flipCard()
             this.setState((currentState) => ({
                 position: currentState.position + 1,
                 showAnswer: false,
                 option: null
             }))
+
         }
         else {
             alert('Please answer first.')
@@ -50,14 +53,22 @@ class Quiz extends Component {
         }))
     }
 
+    onFlipped = () => {
+        this.setState((currenState) => ({
+            flipped: !currenState.flipped
+        }))
+    }
+
     render (){
         const { deckName } = this.props.navigation.state.params
         const deck = this.props.decks[deckName]
         const { position, correct, showAnswer, option } = this.state
         const length = deck.cards.length
 
+        console.log(this.state.flipped)
+
         if (!length){
-            return <View style={styles.noDeck}><Text style={styles.noDeckText}>Create cards first</Text></View>
+            return <View style={styles.noDeck}><Text style={styles.noDeckText}>Please create cards first</Text></View>
         }
         else {
             if(position === length){
@@ -83,7 +94,10 @@ class Quiz extends Component {
                                 length={length} 
                                 position={position} 
                                 deck={deck} 
+                                showAnswer={showAnswer}
                                 onPress={() => this.setState(() => ({showAnswer: true}))}
+                                onRef={ref => (this.child = ref)}
+                                onFlipped={this.onFlipped}
                             />
                         {showAnswer 
                         ?   <View>                                
@@ -91,10 +105,15 @@ class Quiz extends Component {
                                     <Text style={styles.optionTitle}>Was your answer correct?</Text>
                                     <View style={styles.options}>
                                         <TouchableOpacity style={[styles.option, {borderTopRightRadius: 0, borderBottomRightRadius: 0}]} onPress={() => this.handleOption(true)}>
-                                            <Text style={styles.nextText}>{option === true ? '>  Yes  <' : 'Yes'}</Text>
+                                            <Text style={styles.nextText}>
+                                                {option === true 
+                                                    ? '▷ Yes ◁'
+                                                    : 'Yes'
+                                                }
+                                            </Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.handleOption(false)} style={[styles.option, {borderTopLeftRadius: 0, borderBottomLeftRadius: 0, backgroundColor: 'rgb(138, 15, 15)'}]}>
-                                            <Text style={styles.nextText}>{option === false ? '>  No  <' : 'No'}</Text>
+                                            <Text style={styles.nextText}>{option === false ? '▷ No ◁' : 'No'}</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -154,29 +173,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: -200
     },
-    choice: {
-        alignSelf: 'center',
-    },
-    choiceBtn: {
-        backgroundColor: purple,
-        width: 200,
-        height: 40,
-        borderRadius: 50,
-        padding: 20,
-        justifyContent: 'center',
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-    },
-    choiceText: {
-        alignSelf: 'center',
-        fontWeight: 'bold',
-        color: white
-    },
     optionTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -217,7 +213,6 @@ const styles = StyleSheet.create({
         position: 'absolute', 
         bottom: 0, 
         alignSelf:'center'
-
     },
     nextBtn: {
         flex: 1,

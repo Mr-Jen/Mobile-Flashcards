@@ -6,10 +6,18 @@ import {
   TouchableOpacity,
   Animated
 } from 'react-native';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons'
 
-import { black, purple, white} from '../utils/colors'
+import { black, purple, white } from '../utils/colors'
 
 class FlipCard extends Component {
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
     
   UNSAFE_componentWillMount() {
     this.animatedValue = new Animated.Value(0);
@@ -26,7 +34,9 @@ class FlipCard extends Component {
       outputRange: ['180deg', '360deg']
     })
   }
+
   flipCard() {
+    this.props.onFlipped()
     if (this.value >= 90) {
       Animated.spring(this.animatedValue,{
         toValue: 0,
@@ -44,11 +54,11 @@ class FlipCard extends Component {
     }
   }
 
-    onPressCard = () => {
-        this.flipCard()
-        this.props.onPress()
-    }
-  
+  onPressCard = () => {
+      this.flipCard()
+      this.props.onPress()
+  }
+
   render() {
     const frontAnimatedStyle = {
       transform: [
@@ -68,10 +78,11 @@ class FlipCard extends Component {
         <TouchableOpacity onPress={() => this.onPressCard()}>
             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Question {position+1}:</Text>
-                    <View style={{justifyContent: 'center', marginLeft: '50%'}}>
-                        <Text style={{fontWeight: 'bold'}}>{position+1}/{length}</Text>
-                    </View>
+                  <FontAwesome style={styles.headerIcon} name="question-circle-o" size={24} color={purple} />
+                  <Text style={styles.headerText}>Question {position+1}:</Text>
+                  <View style={{justifyContent: 'center', marginLeft: '45%'}}>
+                      <Text style={{fontWeight: 'bold'}}>{position+1}/{length}</Text>
+                  </View>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.flipText}>
@@ -81,10 +92,11 @@ class FlipCard extends Component {
             </Animated.View>
             <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Answer:</Text>
-                    <View style={{justifyContent: 'center', marginLeft: '50%'}}>
-                        <Text style={{fontWeight: 'bold', marginLeft: '30%'}}>{position+1}/{length}</Text>
-                    </View>
+                  <FontAwesome5 style={styles.headerIcon} name="check-circle" size={24} color={'rgba(9, 119, 9, 0.795)'} />
+                  <Text style={[styles.headerText, {color: 'rgba(9, 119, 9, 0.795)'}]}>Answer:</Text>
+                  <View style={{justifyContent: 'center', marginLeft: '45%'}}>
+                      <Text style={{fontWeight: 'bold', marginLeft: '30%'}}>{position+1}/{length}</Text>
+                  </View>
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.flipText}>
@@ -109,6 +121,11 @@ const styles = StyleSheet.create({
     paddingLeft: '9%',
     position: 'absolute',
     top: 15,
+  },
+  headerIcon: {
+    alignSelf: 'center',
+    marginLeft: '-3%',
+    marginRight: '5%'
   },
   headerText: {
     fontSize: 20,
