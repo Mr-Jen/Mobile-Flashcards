@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     submitBtn: {
-      backgroundColor: lightPurp,
+      backgroundColor: purple,
       padding: 10,
       paddingLeft: 30,
       paddingRight: 30,

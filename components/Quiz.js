@@ -65,8 +65,6 @@ class Quiz extends Component {
         const { position, correct, showAnswer, option } = this.state
         const length = deck.cards.length
 
-        console.log(this.state.flipped)
-
         if (!length){
             return <View style={styles.noDeck}><Text style={styles.noDeckText}>Please create cards first</Text></View>
         }
