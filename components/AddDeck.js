@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     colorPickerTitle: {
         fontWeight: 'bold',
         fontSize: 18,
-        marginLeft: 13,
+        marginLeft: '7%',
         marginBottom: -5,
         marginTop: 30
     },
@@ -176,13 +176,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         height: 50,
-        width: 350,
+        width: 320,
         margin: 20,
         borderColor: purple,
         alignSelf: 'center',
     },
     color: {
-        margin: 13,
+        margin: 10,
         backgroundColor: purple,
         borderRadius: 50,
         width: 30,
