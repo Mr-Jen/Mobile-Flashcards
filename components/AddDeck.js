@@ -46,7 +46,8 @@ class AddDeck extends Component {
         
         submitDeck({ title, deck })
         this.setState(() => ({
-            title: ''
+            title: '',
+            color: null
         }))
         
         this.props.navigation.navigate(
@@ -63,8 +64,6 @@ class AddDeck extends Component {
 
     render (){
         const { title } = this.state
-
-        console.log(this.state.color)
 
         return (
             <View style={styles.container}>

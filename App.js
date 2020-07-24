@@ -2,11 +2,10 @@ import 'react-native-gesture-handler';
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Remote debugger']);
 import React from 'react'
-import { View, StatusBar } from 'react-native'
+import { View } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { FontAwesome, Feather } from '@expo/vector-icons'
-import  Constants  from 'expo-constants'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
@@ -20,14 +19,8 @@ import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import FlashcardsStatusBar from './components/FlashcardsStatusBar'
 
-function FlashcardsStatusBar ({backgroundColor, ...props}) {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
 
 const Tabs = createBottomTabNavigator({
   Decks: {

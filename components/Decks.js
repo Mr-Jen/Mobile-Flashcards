@@ -2,8 +2,8 @@ import React, { Component} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
-import { gray, purple } from '../utils/colors'
-import { fetchDeckResults, clearAll } from '../utils/api'
+import { purple } from '../utils/colors'
+import { fetchDeckResults } from '../utils/api'
 import { receiveDecks } from '../actions'
 import Deck from './Deck'
 
@@ -26,19 +26,22 @@ class Decks extends Component {
         }
         else {
             return (
-                <ScrollView>                
-                    {
-                        Object.keys(decks).map((title) => {
-                            const deck = decks[title]
-                            const color = deck.color
-                            const num = deck.cards.length
-                            return (                            
-                                <View key={title} style={{flex: 1}}>
-                                    <Deck title={title} num={num} color={color} navigation={this.props.navigation}/>
-                                </View>
-                            )
-                        })
-                    }
+                <ScrollView  style={styles.decksContainer}> 
+                    <Text style={styles.decksTitle}>Your Decks:</Text>
+                    <View style={styles.decksContainer}>
+                        {
+                            Object.keys(decks).map((title) => {
+                                const deck = decks[title]
+                                const color = deck.color
+                                const num = deck.cards.length
+                                return (                            
+                                    <View key={title} style={{flex: 1}}>
+                                        <Deck title={title} num={num} color={color} navigation={this.props.navigation}/>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>               
                 </ScrollView>
             )
         }
@@ -46,6 +49,18 @@ class Decks extends Component {
 }
 
 const styles = StyleSheet.create({
+    decksContainer: {
+        flex: 1,
+        backgroundColor: 'rgb(255, 255, 255)',
+        marginBottom: 20
+    },
+    decksTitle: {
+        color: purple,
+        fontWeight: '700',
+        fontSize: 30,
+        alignSelf: 'center',
+        paddingTop: 20
+    },
     noDeck: {
         flex: 1,
         justifyContent: 'center',

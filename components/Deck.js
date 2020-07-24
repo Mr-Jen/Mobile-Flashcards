@@ -1,67 +1,109 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity
+} from 'react-native';
 
-import { gray, purple, white } from '../utils/colors'
+import { gray } from '../utils/colors'
 
-const Deck = (props) => {
-    const { title, num, color } = props
+import { black, purple, white } from '../utils/colors'
+
+class FlipCard extends Component {
+  render() {
+    const { title, color, num } = this.props
+
     return (
-        <View style={styles.container}>
-            <View style={styles.fixedRatio}>
-                <TouchableOpacity style={[styles.item, {backgroundColor: color === null ? purple : color}]} onPress={() => props.navigation.navigate(
-                    'DeckView', 
-                    { deckName: title}
-                )}>
-                    <View style={styles.cardContent}>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.cardNumber}>{`${num} ${num !== 1 ? 'cards' : 'card'}`}</Text> 
+      <View style={styles.container}>
+        <View style={styles.fixedRatio}>
+            <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
+                        'DeckView', 
+                        { deckName: title}
+            )}>
+                <View style={styles.flipCard}>
+                    <View style={styles.cardContainer}>
+                        <View style={styles.header}>
+                            <Text style={[styles.headerText, {color: color}]}>{title}</Text>
+                        </View>
+                        <View style={styles.textContainer}>
+                            <Text style={styles.flipText}>
+                                {`${num} ${num !== 1 ? 'cards' : 'card'}`}
+                            </Text>
+                        </View>
                     </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         </View>
-    )
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
-        backgroundColor: 'white'
+  container: {
+    flex: 1,
+  },
+  fixedRatio: {
+    flex: 1,
+  },
+  cardContainer: {
+      flex: 1,
+      alignSelf: 'flex-start',
+      marginLeft: '8%'
+  },
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    position: 'absolute',
+    top: 12,
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: purple
+  },
+  flipCard: {
+    height: '70%',
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(247, 244, 240)',
+    backfaceVisibility: 'hidden',
+    marginLeft: '10%',
+    borderRadius: 10,
+    marginTop: '10%',
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 8,
     },
-    fixedRatio: {
-        flex: 1,
-     },
-    item: {
-        flex: 1,
-        borderRadius: 2,
-        padding: 20,
-        height: 150,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 17,
-        justifyContent: 'center',
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-    },
-    cardContent: {
-        marginTop: '-15%',
-        paddingLeft: '2%'
-    },
-    title: {
-        fontSize: 20,
-        color: white
-    },
-    cardNumber: {
-        fontSize: 16, 
-        color: white,
-    }
-})
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
 
-export default Deck
+    elevation: 17,
+  },
+  flipCardBack: {
+    backgroundColor: white,
+    position: "absolute",
+    top: 0,
+  },
+  textContainer: {
+      flex:1, 
+      width: '95%', 
+      justifyContent: 'flex-start', 
+      marginTop: '20%'
+  },
+  flipText: {
+    width: '90%',
+    fontSize: 15,
+    color: black,
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    color: gray,
+    lineHeight: 20,
+  }
+});
+
+export default FlipCard
