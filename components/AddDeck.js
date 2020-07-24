@@ -51,6 +51,10 @@ class AddDeck extends Component {
         }))
         
         this.props.navigation.navigate(
+            'Decks', 
+            { deckName: title}
+        )
+        this.props.navigation.navigate(
             'DeckView', 
             { deckName: title}
         )
