@@ -80,7 +80,7 @@ class FlipCard extends Component {
                 <View style={styles.header}>
                   <FontAwesome style={styles.headerIcon} name="question-circle-o" size={24} color={purple} />
                   <Text style={styles.headerText}>Question {position+1}:</Text>
-                  <View style={{justifyContent: 'center', marginLeft: '45%'}}>
+                  <View style={{justifyContent: 'center', marginLeft: '38%'}}>
                       <Text style={{fontWeight: 'bold'}}>{position+1}/{length}</Text>
                   </View>
                 </View>
@@ -94,7 +94,7 @@ class FlipCard extends Component {
                 <View style={styles.header}>
                   <FontAwesome5 style={styles.headerIcon} name="check-circle" size={24} color={'rgba(9, 119, 9, 0.795)'} />
                   <Text style={[styles.headerText, {color: 'rgba(9, 119, 9, 0.795)'}]}>Answer:</Text>
-                  <View style={{justifyContent: 'center', marginLeft: '45%'}}>
+                  <View style={{justifyContent: 'center', marginLeft: '35%'}}>
                       <Text style={{fontWeight: 'bold', marginLeft: '30%'}}>{position+1}/{length}</Text>
                   </View>
                 </View>

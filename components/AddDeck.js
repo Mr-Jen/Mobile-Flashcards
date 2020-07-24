@@ -31,33 +31,42 @@ class AddDeck extends Component {
     }
 
     handleOnAdd = () => {
-        const {title, color } = this.state
+        const { color } = this.state
+        const title = this.state.title.trim()
 
-        // Dispatch new deck title
-        const deck = {
-            title: title,
-            color: color,
-            cards: []
+        if (title !== ''){
+            // Dispatch new deck title
+            const deck = {
+                title: title,
+                color: color,
+                cards: []
+            }
+
+            this.props.dispatch(addDeck({
+                [title]: deck
+            }))
+            
+            submitDeck({ title, deck })
+            this.setState(() => ({
+                title: '',
+                color: null
+            }))
+            
+            this.props.navigation.navigate(
+                'Decks', 
+                { deckName: title}
+            )
+            this.props.navigation.navigate(
+                'DeckView', 
+                { deckName: title}
+            )
         }
-
-        this.props.dispatch(addDeck({
-            [title]: deck
-        }))
-        
-        submitDeck({ title, deck })
-        this.setState(() => ({
-            title: '',
-            color: null
-        }))
-        
-        this.props.navigation.navigate(
-            'Decks', 
-            { deckName: title}
-        )
-        this.props.navigation.navigate(
-            'DeckView', 
-            { deckName: title}
-        )
+        else {
+            alert ('Please give the deck a name first')
+            this.setState({
+                title: ''
+            })
+        }
     }
 
     onChangeColor = (color) => {
@@ -149,7 +158,7 @@ class AddDeck extends Component {
                         ></TouchableOpacity>
                     </View>
                 </View>
-                <SubmitBtn onPress={this.handleOnAdd} disabled={title === '' ? true : false}/>
+                <SubmitBtn onPress={this.handleOnAdd}/>
             </View>
         )
     }
@@ -174,7 +183,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderRadius: 5,
+        borderRadius: 12,
         height: 50,
         width: 320,
         margin: 20,

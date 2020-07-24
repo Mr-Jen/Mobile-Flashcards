@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { Entypo } from '@expo/vector-icons'; 
 
 import { submitCard } from '../utils/api'
 import { addCard } from '../actions/'
@@ -13,7 +14,7 @@ function SubmitBtn ({ onPress, disabled }) {
             onPress={onPress}
             disabled={disabled}
         >
-            <Text style={styles.submitBtnText}>Add</Text>
+            <Entypo name="plus" style={{alignSelf: 'center'}} size={35} color={white} />
         </TouchableOpacity>
     )
 }
@@ -60,12 +61,6 @@ class AddCard extends Component {
             answer: ''
         }))
 
-        //const { deckName } = this.props.navigation.state.params
-
-        /*this.props.navigation.navigate(
-            'DeckView', 
-            { deckName: deckName}
-        )*/
         this.props.navigation.goBack(null)
 
     }
@@ -103,15 +98,19 @@ const styles = StyleSheet.create({
     title: {
         alignSelf: 'center',
         color: purple,
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
-        marginTop: 30
+        marginTop: 30,
+        marginBottom: 10
     },
     input: { 
         height: 40, 
-        borderColor: 'gray', 
-        borderWidth: 1,
-        margin: 20,
+        borderColor: purple, 
+        width: '80%',
+        alignSelf: 'center',
+        borderWidth: 2,
+        borderRadius: 10,
+        margin: 15,
         paddingLeft: 10
     },
     submitBtn: {

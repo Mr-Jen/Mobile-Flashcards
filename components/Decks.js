@@ -36,7 +36,7 @@ class Decks extends Component {
                                 const num = deck.cards.length
                                 return (                            
                                     <View key={title} style={{flex: 1}}>
-                                        <Deck title={title} num={num} color={color} navigation={this.props.navigation}/>
+                                        <Deck title={title} num={num} color={color} touch={'yes'} navigation={this.props.navigation}/>
                                     </View>
                                 )
                             })
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: 'sans-serif-medium',
         alignSelf: 'center',
-        paddingTop: 20,
+        paddingTop: '7%',
         borderBottomWidth: 5,
         borderBottomColor: purple
     },

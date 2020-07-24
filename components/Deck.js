@@ -3,25 +3,27 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import { gray } from '../utils/colors'
 
 import { black, purple, white } from '../utils/colors'
 
-class FlipCard extends Component {
+class Deck extends Component {
   render() {
-    const { title, color, num } = this.props
+    const { title, color, num, touch } = this.props
 
     return (
       <View style={styles.container}>
         <View style={styles.fixedRatio}>
-            <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
+          {touch 
+          ? <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
                         'DeckView', 
                         { deckName: title}
             )}>
-                <View style={styles.flipCard}>
+                <View style={[styles.flipCard, {borderColor: color}]}>
                     <View style={styles.cardContainer}>
                         <View style={styles.header}>
                             <Text style={[styles.headerText, {color: color}]}>{title}</Text>
@@ -34,6 +36,24 @@ class FlipCard extends Component {
                     </View>
                 </View>
             </TouchableOpacity>
+          : <TouchableWithoutFeedback style={styles.item} onPress={() => this.props.navigation.navigate(
+                        'DeckView', 
+                        { deckName: title}
+            )}>
+                <View style={[styles.flipCard, {borderColor: color}]}>
+                    <View style={styles.cardContainer}>
+                        <View style={styles.header}>
+                            <Text style={[styles.headerText, {color: color}]}>{title}</Text>
+                        </View>
+                        <View style={styles.textContainer}>
+                            <Text style={styles.flipText}>
+                                {`${num} ${num !== 1 ? 'cards' : 'card'}`}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableWithoutFeedback>
+          }
         </View>
       </View>
     );
@@ -60,7 +80,7 @@ const styles = StyleSheet.create({
     top: 12,
   },
   headerText: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
     color: purple
   },
@@ -69,20 +89,21 @@ const styles = StyleSheet.create({
     width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(247, 244, 240)',
+    backgroundColor: 'rgb(250, 248, 246)',
     backfaceVisibility: 'hidden',
     marginLeft: '10%',
     borderRadius: 10,
+    borderWidth: .5,
     marginTop: '10%',
     shadowColor: "#000",
     shadowOffset: {
-        width: 0,
-        height: 8,
+      width: 0,
+      height: 4,
     },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
-
-    elevation: 17,
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    
+    elevation: 8,
   },
   flipCardBack: {
     backgroundColor: white,
@@ -106,4 +127,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FlipCard
+export default Deck
