@@ -58,8 +58,11 @@ const styles = StyleSheet.create({
         color: purple,
         fontWeight: '700',
         fontSize: 30,
+        fontFamily: 'sans-serif-medium',
         alignSelf: 'center',
-        paddingTop: 20
+        paddingTop: 20,
+        borderBottomWidth: 5,
+        borderBottomColor: purple
     },
     noDeck: {
         flex: 1,

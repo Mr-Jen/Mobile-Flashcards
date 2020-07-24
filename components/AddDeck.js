@@ -63,7 +63,7 @@ class AddDeck extends Component {
     }
 
     render (){
-        const { title } = this.state
+        const { title, color } = this.state
 
         return (
             <View style={styles.container}>
@@ -75,14 +75,74 @@ class AddDeck extends Component {
                     onChange={(title) => this.handleChangeTitle(title.nativeEvent.text)}
                 />
                 <View styles={styles.colorPicker}>
-                    <Text>Pick a color for your deck:</Text>
+                    <Text style={styles.colorPickerTitle}>Pick a color for your deck:</Text>
                     <View style={styles.colors}>
-                        <TouchableOpacity onPress={() => this.onChangeColor('yellow')} style={[styles.color, {backgroundColor: yellow}]}></TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.onChangeColor('orange')} style={[styles.color, {backgroundColor: orange}]}></TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.onChangeColor('red')} style={[styles.color, {backgroundColor: red}]}></TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.onChangeColor('brown')} style={[styles.color, {backgroundColor: brown}]}></TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.onChangeColor('green')} style={[styles.color, {backgroundColor: green}]}></TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.onChangeColor('blue')} style={[styles.color, {backgroundColor: blue}]}></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('yellow')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: yellow, 
+                                    borderColor: color === 'yellow' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'yellow' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('orange')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: orange, 
+                                    borderColor: color === 'orange' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'orange' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('red')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: red, 
+                                    borderColor: color === 'red' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'red' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('brown')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: brown, 
+                                    borderColor: color === 'brown' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'brown' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('green')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: green, 
+                                    borderColor: color === 'green' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'green' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={() => this.onChangeColor('blue')} 
+                            style={
+                                [styles.color, 
+                                {
+                                    backgroundColor: blue, 
+                                    borderColor: color === 'blue' ? 'rgb(0, 0, 0)' : null,
+                                    borderWidth: color === 'blue' ? 3 : null,
+                                }]
+                            }
+                        ></TouchableOpacity>
                     </View>
                 </View>
                 <SubmitBtn onPress={this.handleOnAdd} disabled={title === '' ? true : false}/>
@@ -96,7 +156,14 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 20,
       backgroundColor: white,
-      paddingTop: 60
+      paddingTop: 40
+    },
+    colorPickerTitle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginLeft: 13,
+        marginBottom: -5,
+        marginTop: 30
     },
     colors: {
         flexDirection: 'row',
@@ -121,7 +188,7 @@ const styles = StyleSheet.create({
         color: purple,
         fontSize: 30,
         fontWeight: 'bold',
-        paddingBottom: 30
+        paddingBottom: 20
     },
     input: { 
         height: 40, 
