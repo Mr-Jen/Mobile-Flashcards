@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         color: purple,
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 30
     },
     input: { 
         height: 40, 
@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
         backgroundColor: purple,
         width: 200,
         height: 40,
-        borderRadius: 50,
+        borderRadius: 10,
         padding: 20,
-        marginTop: 17,
+        marginTop: 25,
         justifyContent: 'center',
         alignSelf: 'center',
         shadowRadius: 3,

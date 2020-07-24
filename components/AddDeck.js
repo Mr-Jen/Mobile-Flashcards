@@ -13,7 +13,7 @@ function SubmitBtn ({ onPress, disabled }) {
             onPress={onPress}
             disabled={disabled}
         >
-            <Text style={styles.submitBtnText}>Create</Text>
+            <Text style={styles.submitBtnText}>Create Deck</Text>
         </TouchableOpacity>
     )
   }
@@ -194,9 +194,10 @@ const styles = StyleSheet.create({
         height: 40, 
         borderColor: 'gray', 
         borderWidth: 1,
+        marginTop: -3,
         margin: 20,
         padding: 10,
-        borderRadius: 10
+        borderRadius: 8
     },
     submitBtn: {
       backgroundColor: purple,

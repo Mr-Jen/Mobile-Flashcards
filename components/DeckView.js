@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { ConfirmDialog } from 'react-native-simple-dialogs'
 
-import { gray, purple, white, red } from '../utils/colors'
+import { purple, white, red } from '../utils/colors'
 import { removeDeckFromStorage } from '../utils/api'
 import { removeDeck } from '../actions'
+import Deck from './Deck'
 
 class DeckView extends Component {
     state = {
@@ -43,12 +44,12 @@ class DeckView extends Component {
         const { deckName } = this.props.navigation.state.params
         const deck = this.props.decks[deckName]
         const num = deck && deck.cards.length
+        const color = deck && deck.color
 
         return (
-            <View>
-                <View style={styles.item}>
-                    <Text style={{fontSize: 20}}>{deckName}</Text>
-                    <Text style={{fontSize: 16, color: gray}}>{`${num} ${num !== 1 ? 'cards' : 'card'}`}</Text> 
+            <View style={{flex: 1, backgroundColor: 'rgb(255, 255, 255)', marginBottom: 30}}>
+                <View style={{flex: 1}}>
+                    <Deck title={deckName} num={num} color={color} navigation={this.props.navigation}/>
                 </View>
                 <View style={styles.option}>                    
                     <TouchableOpacity style={styles.optionBtn} onPress={() => this.props.navigation.navigate(

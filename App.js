@@ -5,7 +5,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { FontAwesome, Feather } from '@expo/vector-icons'
+import { AntDesign, Feather } from '@expo/vector-icons'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack';
@@ -34,7 +34,7 @@ const Tabs = createBottomTabNavigator({
     screen: AddDeck,
     navigationOptions: {
       tabBarLabel: 'Add Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <AntDesign name="plus" size={30} color={tintColor} />
     }
   }
 }, {

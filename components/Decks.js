@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     decksContainer: {
         flex: 1,
         backgroundColor: 'rgb(255, 255, 255)',
-        marginBottom: 20
+        marginBottom: 30
     },
     decksTitle: {
         color: purple,
