@@ -26,6 +26,9 @@ class Quiz extends Component {
 
     handleNext = () => {
         if (this.state.option !== null){
+            this.setState((currentState) => ({
+                correct: this.state.option === true ? currentState.correct + 1 : currentState.correct
+            }))
             this.state.flipped && this.child.flipCard()
             this.setState((currentState) => ({
                 position: currentState.position + 1,
@@ -40,9 +43,8 @@ class Quiz extends Component {
     }
 
     handleOption = (option) => {
-        this.setState((currentState) => ({
-            option,
-            correct: option === true ? currentState.correct + 1 : currentState.correct
+        this.setState(() => ({
+            option
         }))
     }
 
