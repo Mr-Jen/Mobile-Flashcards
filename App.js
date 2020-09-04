@@ -19,6 +19,7 @@ import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import EditDeck from './components/EditDeck'
 import FlashcardsStatusBar from './components/FlashcardsStatusBar'
 
 
@@ -81,6 +82,15 @@ const Stack = createStackNavigator({
   },
   Quiz: {
     screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  EditDeck: {
+    screen: EditDeck,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

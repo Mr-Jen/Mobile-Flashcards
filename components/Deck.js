@@ -18,42 +18,23 @@ class Deck extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.fixedRatio}>
-          {touch 
-          ? <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
+           <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate(
                         'DeckView', 
                         { deckName: title}
             )}>
-                <View style={[styles.flipCard, {borderColor: color}]}>
-                    <View style={styles.cardContainer}>
-                        <View style={styles.header}>
-                            <Text style={[styles.headerText, {color: color}]}>{title}</Text>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <Text style={styles.flipText}>
-                                {`${num} ${num !== 1 ? 'cards' : 'card'}`}
-                            </Text>
-                        </View>
+                          <View style={[styles.flipCard, {borderColor: color}]}>
+                <View style={styles.cardContainer}>
+                    <View style={styles.header}>
+                        <Text style={[styles.headerText, {color: color}]}>{title}</Text>
                     </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.flipText}>
+                            {`${num} ${num !== 1 ? 'cards' : 'card'}`}
+                        </Text>
+                    </View>
+                </View>
                 </View>
             </TouchableOpacity>
-          : <TouchableWithoutFeedback style={styles.item} onPress={() => this.props.navigation.navigate(
-                        'DeckView', 
-                        { deckName: title}
-            )}>
-                <View style={[styles.flipCard, {borderColor: color}]}>
-                    <View style={styles.cardContainer}>
-                        <View style={styles.header}>
-                            <Text style={[styles.headerText, {color: color}]}>{title}</Text>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <Text style={styles.flipText}>
-                                {`${num} ${num !== 1 ? 'cards' : 'card'}`}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-            </TouchableWithoutFeedback>
-          }
         </View>
       </View>
     );

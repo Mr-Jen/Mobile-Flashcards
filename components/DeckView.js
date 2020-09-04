@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { ConfirmDialog } from 'react-native-simple-dialogs'
 
-import { purple, white, red } from '../utils/colors'
+import { purple, white, red, blue } from '../utils/colors'
 import { removeDeckFromStorage } from '../utils/api'
 import { removeDeck } from '../actions'
 import Deck from './Deck'
@@ -63,6 +63,14 @@ class DeckView extends Component {
                         { deckName: deckName}
                     )}>
                         <Text style={styles.optionText}>Start Quiz</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.deleteBtn, {marginBottom: '-2%'}]} onPress={() => this.props.navigation.navigate(
+                        'EditDeck',
+                        { deckName: deckName}
+                    )}>
+                        <Text style={[styles.delete, {color: purple, fontSize: 18, fontWeight: 'bold'}]}>
+                            Edit Deck
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.deleteBtn} onPress={() => this.setState({dialogVisible: true})}>
                         <Text style={styles.delete}>Delete Deck</Text>
